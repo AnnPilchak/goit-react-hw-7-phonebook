@@ -31,10 +31,9 @@
         })
         .addCase(deleteContact.fulfilled, (state, action) => {
           state.isLoading = false;
-          const index = state.items.findIndex(
-            contact => contact.id === action.payload.id
+          state.items = state.items.filter(
+            contact => contact.id !== action.payload
           );
-          state.items.splice(index, 1);
         })
         .addMatcher(action => action.type.endsWith(`pending`), handlePending)
         .addMatcher(action => action.type.endsWith(`rejected`), handleRejected);
